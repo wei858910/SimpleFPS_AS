@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{BF693877-4715-A104-7ED0-6A886206DA35}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "SimpleFPS_AS",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}
