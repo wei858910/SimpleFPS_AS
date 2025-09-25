@@ -1,9 +1,10 @@
 class AFPSCharacter : ACharacter
 {
-
 	// Camera
 	UPROPERTY(DefaultComponent, BlueprintReadOnly, Category = "Camera")
 	UCameraComponent CameraComponent;
+
+	default CameraComponent.bUsePawnControlRotation = true;
 
 	// Mesh
 	UPROPERTY(DefaultComponent, BlueprintReadOnly, Attach = CameraComponent, Category = "Mesh")
