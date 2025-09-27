@@ -28,6 +28,9 @@ class AFPSCharacter : ACharacter
 	UPROPERTY(EditDefaultsOnly, Category = "Camera")
 	TSubclassOf<UCameraShakeBase> JumpCameraShake;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Gameplay")
+	UAnimSequence FireAnimation;
+
 	void Fire()
 	{
 		check(ProjectileClass != nullptr, "ProjectileClass is nullptr");
@@ -38,8 +41,19 @@ class AFPSCharacter : ACharacter
 		SpawnActor(ProjectileClass, MuzzleLocation, MuzzleRotation);
 
 		check(FireSound != nullptr, "FireSound is nullptr");
-
 		Gameplay::PlaySoundAtLocation(FireSound, MuzzleLocation, MuzzleRotation);
+
+		check(FireAnimation != nullptr, "FireAnimation is nullptr");
+		UAnimInstance AnimInstance = Mesh1PCompoent.GetAnimInstance();
+		if (IsValid(AnimInstance))
+		{
+			// 以动态蒙太奇方式播放开火动画
+			AnimInstance.PlaySlotAnimationAsDynamicMontage(
+				FireAnimation, // 开火动画资源
+				n"Arms",	   // 动画插槽名称（手臂插槽）
+				0.f			   // 混合时间（立即混合）
+			);
+		}
 
 		check(MuzzleFlash != nullptr, "MuzzleFlash is nullptr");
 		Gameplay::SpawnEmitterAttached(MuzzleFlash, GunMeshComponent, n"Muzzle");
