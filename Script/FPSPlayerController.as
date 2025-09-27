@@ -94,6 +94,7 @@ class AFPSPlayerController : APlayerController
 		AFPSCharacter FPSCharacter = Cast<AFPSCharacter>(GetControlledPawn());
 		if (IsValid(FPSCharacter))
 		{
+			FPSCharacter.Fire();
 		}
 	}
 };
