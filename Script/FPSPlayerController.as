@@ -69,7 +69,7 @@ class AFPSPlayerController : APlayerController
 	private void LookInput(FInputActionValue ActionValue, float32 ElapsedTime, float32 TriggeredTime, const UInputAction SourceAction)
 	{
 		FVector2D LookValue = ActionValue.GetAxis2D();
-		Print(LookValue.ToString());
+		// Print(LookValue.ToString());
 		AFPSCharacter FPSCharacter = Cast<AFPSCharacter>(GetControlledPawn());
 		if (IsValid(FPSCharacter))
 		{

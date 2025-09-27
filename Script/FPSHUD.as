@@ -12,7 +12,7 @@ class AFPSHUD : AHUD
 	UFUNCTION(BlueprintOverride)
 	void DrawHUD(int SizeX, int SizeY)
 	{
-		check(CrosshairTex == nullptr);
+		check(CrosshairTex != nullptr);
 
 		const FVector2D Center(SizeX * 0.5, SizeY * 0.5);
 

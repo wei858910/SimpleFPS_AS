@@ -22,6 +22,12 @@ class AFPSCharacter : ACharacter
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	UParticleSystem MuzzleFlash;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	TSubclassOf<UCameraShakeBase> LandedCameraShake;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	TSubclassOf<UCameraShakeBase> JumpCameraShake;
+
 	void Fire()
 	{
 		check(ProjectileClass != nullptr, "ProjectileClass is nullptr");
@@ -37,5 +43,27 @@ class AFPSCharacter : ACharacter
 
 		check(MuzzleFlash != nullptr, "MuzzleFlash is nullptr");
 		Gameplay::SpawnEmitterAttached(MuzzleFlash, GunMeshComponent, n"Muzzle");
+	}
+
+	UFUNCTION(BlueprintOverride)
+	void OnLanded(FHitResult Hit)
+	{
+		check(LandedCameraShake != nullptr);
+		AFPSPlayerController PC = Cast<AFPSPlayerController>(GetController());
+		if (IsValid(PC))
+		{
+			PC.PlayerCameraManager.StartCameraShake(LandedCameraShake);
+		}
+	}
+
+	UFUNCTION(BlueprintOverride)
+	void OnJumped()
+	{
+		check(JumpCameraShake != nullptr);
+		AFPSPlayerController PC = Cast<AFPSPlayerController>(GetController());
+		if (IsValid(PC))
+		{
+			PC.PlayerCameraManager.StartCameraShake(JumpCameraShake);
+		}
 	}
 };
