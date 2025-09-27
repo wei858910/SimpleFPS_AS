@@ -32,6 +32,15 @@ class AFPSProjectile : AActor
 	{
 		check(ExplosionFX != nullptr, "AFPSProjectile ExplosionFX is nullptr");
 		Gameplay::SpawnEmitterAtLocation(ExplosionFX, GetActorLocation(), FRotator::ZeroRotator, FVector(5.f));
+
+		// 播放世界范围内的相机抖动效果
+		// 参数说明：
+		// 1. UCamShakeTakeDamage - 相机抖动效果类，定义了受伤时的震动效果
+		// 2. GetActorLocation() - 震动源位置
+		// 3. 500.f - 震动影响范围的内半径  在此距离内的摄像机会受到完整强度的震动效果
+		// 4. 3000.f - 从内半径到外半径，震动强度会逐渐衰减，超出此距离后震动强度为0
+		Gameplay::PlayWorldCameraShake(UCamShakeTakeDamage, GetActorLocation(), 500.f, 3000.f);
+
 		DestroyActor();
 	}
 
